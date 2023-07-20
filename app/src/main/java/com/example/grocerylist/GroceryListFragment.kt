@@ -5,18 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grocerylist.adapter.TypeAdapter
 import com.example.grocerylist.databinding.FragmentGroceryListBinding
 
-class GroceryList : Fragment() {
+class GroceryListFragment : Fragment() {
 
     // binding
     private lateinit var binding: FragmentGroceryListBinding
 
     // widgets
     private lateinit var rvItems: RecyclerView
+    private lateinit var floatingAdd: com.google.android.material.floatingactionbutton.FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +31,12 @@ class GroceryList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        floatingAdd = binding.floatingAddBtn
+        floatingAdd.setOnClickListener {
+            val action = GroceryListFragmentDirections.actionGroceryListToTypeChooseFragment()
+            this.findNavController().navigate(action)
+        }
 
         rvItems = binding.rvItems
         rvItems.setHasFixedSize(true)

@@ -7,7 +7,30 @@
 
     <fragment
         android:id="@+id/groceryList"
-        android:name="com.example.grocerylist.GroceryList"
+        android:name="com.example.grocerylist.GroceryListFragment"
         android:label="fragment_grocery_list"
-        tools:layout="@layout/fragment_grocery_list" />
+        tools:layout="@layout/fragment_grocery_list" >
+        <action
+            android:id="@+id/action_groceryList_to_typeChooseFragment"
+            app:destination="@id/typeChooseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/typeChooseFragment"
+        android:name="com.example.grocerylist.TypeChooseFragment"
+        android:label="TypeChooseFragment" >
+        <action
+            android:id="@+id/action_typeChooseFragment_to_groceryAddFragment"
+            app:destination="@id/groceryAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groceryAddFragment"
+        android:name="com.example.grocerylist.GroceryAddFragment"
+        android:label="GroceryAddFragment" >
+        <action
+            android:id="@+id/action_groceryAddFragment_to_groceryList"
+            app:destination="@id/groceryList" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
 </navigation>
