@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.grocerylist.databinding.FragmentTypeChooseBinding
 
+//TODO: Change action bar title
 class TypeChooseFragment : Fragment() {
 
     // binding
