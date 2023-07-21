@@ -9,17 +9,14 @@ interface GroceryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(gro: Grocery)
 
-    @Update
-    suspend fun update(gro: Grocery)
-
-    @Delete
-    suspend fun delete(gro: Grocery)
-
-    @Query("SELECT * from grocery WHERE type = :type ORDER BY type ASC")
-    fun getItems(type: Int): Flow<List<Grocery>>
+    @Query("SELECT * from grocery WHERE type = :type AND stats = :stats ORDER BY name ASC")
+    fun getItems(type: Int, stats: Boolean): Flow<List<Grocery>>
 
     @Query("SELECT * from grocery WHERE id = :id")
     fun getItem(id: Int): Flow<Grocery>
+
+    @Query("SELECT DISTINCT type from grocery ORDER BY type ASC")
+    fun getType(): Flow<List<Int>>
 
     @Query("UPDATE grocery SET stats = :stats WHERE id = :id")
     fun updateItemStats(id: Int, stats: Boolean)
