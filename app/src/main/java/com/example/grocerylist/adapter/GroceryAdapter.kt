@@ -4,15 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grocerylist.R
 import com.example.grocerylist.data.Grocery
 
-//TODO: dont forget to change List<String> to List<Grocery>
-class GroceryAdapter(private val listGrocery: List<String>): RecyclerView.Adapter<GroceryAdapter.ListViewHolder>() {
+class GroceryAdapter(private val listGrocery: LiveData<List<Grocery>>): RecyclerView.Adapter<GroceryAdapter.ListViewHolder>() {
 
     class ListViewHolder(groceryView: View): RecyclerView.ViewHolder(groceryView) {
         val chkBox: CheckBox = itemView.findViewById(R.id.checkBox)
+        val groQty: TextView = itemView.findViewById(R.id.text_qty)
     }
 
     override fun onCreateViewHolder(
@@ -30,11 +32,23 @@ class GroceryAdapter(private val listGrocery: List<String>): RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: GroceryAdapter.ListViewHolder, position: Int) {
-        val item = listGrocery[position]
-        holder.chkBox.text = item
+        val item = listGrocery.value?.get(position)
 
-        //TODO: add function if checkBox is clicked
+        if (item != null) {
+            holder.chkBox.text = item.groName
+            holder.groQty.text = item.groQty.toString()
+
+            //TODO: add function if checkBox is clicked
+        }
     }
 
-    override fun getItemCount(): Int = listGrocery.size
+    override fun getItemCount(): Int = listGrocery.value?.size?: 0
+
+    init {
+        // Observer untuk LiveData nBoughtRaw
+        listGrocery.observeForever {
+            // Di sini Anda dapat memperbarui data di dalam adapter RecyclerView
+            notifyDataSetChanged()
+        }
+    }
 }
