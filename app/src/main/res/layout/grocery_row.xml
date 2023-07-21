@@ -31,5 +31,19 @@
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/text_qty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="qty"
+            android:textAlignment="textEnd"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/checkBox"
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:textColor="?colorOnPrimary"
+            android:textStyle="bold"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
