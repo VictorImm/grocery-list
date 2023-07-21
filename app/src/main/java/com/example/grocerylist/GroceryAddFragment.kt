@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.grocerylist.dataViewModel.GroceryViewModel
+import com.example.grocerylist.dataViewModel.GroceryViewModelFactory
 import com.example.grocerylist.databinding.FragmentGroceryAddBinding
 import com.example.grocerylist.databinding.FragmentGroceryListBinding
 
@@ -25,6 +28,13 @@ class GroceryAddFragment : Fragment() {
     private lateinit var inputGrocery: com.google.android.material.textfield.TextInputEditText
     private lateinit var inputQty: com.google.android.material.textfield.TextInputEditText
     private lateinit var btnAdd: Button
+
+    // viewModel initialization
+    private val viewModel: GroceryViewModel by viewModels {
+        GroceryViewModelFactory(
+            (activity?.application as GroceryApplication).database.groceryDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +59,27 @@ class GroceryAddFragment : Fragment() {
         inputGrocery = binding.inputGrocery
         inputQty = binding.inputQty
         btnAdd = binding.btnAdd
-        btnAdd.setOnClickListener { btnClicked() }
+        btnAdd.setOnClickListener { btnClicked(typeId) }
     }
 
-    private fun btnClicked() {
-        //TODO: Access DAO
+    private fun btnClicked(type: String) {
+        if (viewModel.isEntryValid(
+                0,
+                inputGrocery.text.toString(),
+                inputQty.text.toString().toInt())) {
+            viewModel.addNewGrocery(
+                (when (type) {
+                    "Raw" -> 1
+                    "Clean" -> 2
+                    "Water" -> 3
+                    "Snack" -> 4
+                    "Fruit or Veggies" -> 5
+                    else -> 6
+                }),
+                inputGrocery.text.toString(),
+                inputQty.text.toString().toInt()
+            )
+        }
 
         val action = GroceryAddFragmentDirections.actionGroceryAddFragmentToGroceryList()
         this.findNavController().navigate(action)
