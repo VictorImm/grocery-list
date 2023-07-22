@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,141 +8,146 @@
     tools:context=".TypeChooseFragment"
     android:layout_margin="16dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/mid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/btn_raw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/pink"
-        android:contentDescription="Raw Button"
-        android:src="@drawable/ic_raw"
-        app:layout_constraintEnd_toStartOf="@+id/mid"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white_2" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
 
-    <TextView
-        android:id="@+id/txt_raw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Raw Material"
-        app:layout_constraintEnd_toEndOf="@+id/btn_raw"
-        app:layout_constraintStart_toStartOf="@+id/btn_raw"
-        app:layout_constraintTop_toBottomOf="@+id/btn_raw" />
+        <ImageButton
+            android:id="@+id/btn_raw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pink"
+            android:contentDescription="Raw Button"
+            android:src="@drawable/ic_raw"
+            app:layout_constraintEnd_toStartOf="@+id/mid"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white_2" />
 
-    <ImageButton
-        android:id="@+id/btn_clean"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue_1"
-        android:contentDescription="Clean Button"
-        android:src="@drawable/ic_clean"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/mid"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white_2" />
+        <TextView
+            android:id="@+id/txt_raw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Raw Material"
+            app:layout_constraintEnd_toEndOf="@+id/btn_raw"
+            app:layout_constraintStart_toStartOf="@+id/btn_raw"
+            app:layout_constraintTop_toBottomOf="@+id/btn_raw" />
 
-    <TextView
-        android:id="@+id/txt_clean"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clean"
-        app:layout_constraintEnd_toEndOf="@+id/btn_clean"
-        app:layout_constraintStart_toStartOf="@+id/btn_clean"
-        app:layout_constraintTop_toBottomOf="@+id/btn_clean" />
+        <ImageButton
+            android:id="@+id/btn_clean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue_1"
+            android:contentDescription="Clean Button"
+            android:src="@drawable/ic_clean"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/mid"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white_2" />
 
-    <ImageButton
-        android:id="@+id/btn_water"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/blue_1"
-        android:contentDescription="Water Button"
-        android:src="@drawable/ic_drink"
-        app:layout_constraintEnd_toStartOf="@+id/mid"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_raw"
-        app:tint="@color/white_2" />
+        <TextView
+            android:id="@+id/txt_clean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clean"
+            app:layout_constraintEnd_toEndOf="@+id/btn_clean"
+            app:layout_constraintStart_toStartOf="@+id/btn_clean"
+            app:layout_constraintTop_toBottomOf="@+id/btn_clean" />
 
-    <TextView
-        android:id="@+id/txt_water"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Water"
-        app:layout_constraintEnd_toEndOf="@+id/btn_water"
-        app:layout_constraintStart_toStartOf="@+id/btn_water"
-        app:layout_constraintTop_toBottomOf="@+id/btn_water" />
+        <ImageButton
+            android:id="@+id/btn_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/blue_1"
+            android:contentDescription="Water Button"
+            android:src="@drawable/ic_drink"
+            app:layout_constraintEnd_toStartOf="@+id/mid"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_raw"
+            app:tint="@color/white_2" />
 
-    <ImageButton
-        android:id="@+id/btn_snack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/yellow"
-        android:contentDescription="Snack Button"
-        android:src="@drawable/ic_snack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/mid"
-        app:layout_constraintTop_toBottomOf="@+id/txt_clean"
-        app:tint="@color/black_2" />
+        <TextView
+            android:id="@+id/txt_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Water"
+            app:layout_constraintEnd_toEndOf="@+id/btn_water"
+            app:layout_constraintStart_toStartOf="@+id/btn_water"
+            app:layout_constraintTop_toBottomOf="@+id/btn_water" />
 
-    <TextView
-        android:id="@+id/txt_snack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Snack"
-        app:layout_constraintEnd_toEndOf="@+id/btn_snack"
-        app:layout_constraintStart_toStartOf="@+id/btn_snack"
-        app:layout_constraintTop_toBottomOf="@+id/btn_snack" />
+        <ImageButton
+            android:id="@+id/btn_snack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/yellow"
+            android:contentDescription="Snack Button"
+            android:src="@drawable/ic_snack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/mid"
+            app:layout_constraintTop_toBottomOf="@+id/txt_clean"
+            app:tint="@color/black_2" />
 
-    <ImageButton
-        android:id="@+id/btn_fruit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/green_2"
-        android:contentDescription="Fruit Button"
-        android:src="@drawable/ic_fruit"
-        app:layout_constraintEnd_toStartOf="@+id/mid"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_water"
-        app:tint="@color/white_2" />
+        <TextView
+            android:id="@+id/txt_snack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Snack"
+            app:layout_constraintEnd_toEndOf="@+id/btn_snack"
+            app:layout_constraintStart_toStartOf="@+id/btn_snack"
+            app:layout_constraintTop_toBottomOf="@+id/btn_snack" />
 
-    <TextView
-        android:id="@+id/txt_fruit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fruit/Vegie"
-        app:layout_constraintEnd_toEndOf="@+id/btn_fruit"
-        app:layout_constraintStart_toStartOf="@+id/btn_fruit"
-        app:layout_constraintTop_toBottomOf="@+id/btn_fruit" />
+        <ImageButton
+            android:id="@+id/btn_fruit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/green_2"
+            android:contentDescription="Fruit Button"
+            android:src="@drawable/ic_fruit"
+            app:layout_constraintEnd_toStartOf="@+id/mid"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_water"
+            app:tint="@color/white_2" />
 
-    <ImageButton
-        android:id="@+id/btn_other"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/purple_200"
-        android:contentDescription="Other Button"
-        android:src="@drawable/ic_other"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/mid"
-        app:layout_constraintTop_toBottomOf="@+id/txt_snack"
-        app:tint="@color/white_2" />
+        <TextView
+            android:id="@+id/txt_fruit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fruit/Vegie"
+            app:layout_constraintEnd_toEndOf="@+id/btn_fruit"
+            app:layout_constraintStart_toStartOf="@+id/btn_fruit"
+            app:layout_constraintTop_toBottomOf="@+id/btn_fruit" />
 
-    <TextView
-        android:id="@+id/txt_other"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Other"
-        app:layout_constraintEnd_toEndOf="@+id/btn_other"
-        app:layout_constraintStart_toStartOf="@+id/btn_other"
-        app:layout_constraintTop_toBottomOf="@+id/btn_other" />
+        <ImageButton
+            android:id="@+id/btn_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/purple_200"
+            android:contentDescription="Other Button"
+            android:src="@drawable/ic_other"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/mid"
+            app:layout_constraintTop_toBottomOf="@+id/txt_snack"
+            app:tint="@color/white_2" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txt_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            app:layout_constraintEnd_toEndOf="@+id/btn_other"
+            app:layout_constraintStart_toStartOf="@+id/btn_other"
+            app:layout_constraintTop_toBottomOf="@+id/btn_other" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
