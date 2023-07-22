@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/groceryList"
         android:name="com.example.grocerylist.GroceryListFragment"
-        android:label="fragment_grocery_list"
-        tools:layout="@layout/fragment_grocery_list" >
+        android:label="Grocery List"
+        tools:layout="@layout/fragment_grocery_list">
         <action
             android:id="@+id/action_groceryList_to_typeChooseFragment"
             app:destination="@id/typeChooseFragment" />
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/typeChooseFragment"
         android:name="com.example.grocerylist.TypeChooseFragment"
-        android:label="TypeChooseFragment" >
+        android:label="Choose Type">
         <action
             android:id="@+id/action_typeChooseFragment_to_groceryAddFragment"
             app:destination="@id/groceryAddFragment" />
@@ -25,10 +25,12 @@
     <fragment
         android:id="@+id/groceryAddFragment"
         android:name="com.example.grocerylist.GroceryAddFragment"
-        android:label="GroceryAddFragment" >
+        android:label="@string/type">
         <action
             android:id="@+id/action_groceryAddFragment_to_groceryList"
-            app:destination="@id/groceryList" />
+            app:destination="@id/groceryList"
+            app:popUpTo="@id/groceryList"
+            app:popUpToInclusive="true" />
         <argument
             android:name="type"
             app:argType="string" />
