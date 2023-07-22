@@ -14,7 +14,6 @@ import com.example.grocerylist.dataViewModel.GroceryViewModelFactory
 import com.example.grocerylist.databinding.FragmentGroceryAddBinding
 import com.example.grocerylist.databinding.FragmentGroceryListBinding
 
-//TODO: Change action bar title
 class GroceryAddFragment : Fragment() {
 
     companion object {
@@ -64,23 +63,46 @@ class GroceryAddFragment : Fragment() {
     }
 
     private fun btnClicked(type: String) {
+        var name: String = ""
+        var qty: Int = 0
+
+        // check if entry is filled
         if (viewModel.isEntryValid(
                 0,
                 inputGrocery.text.toString(),
-                inputQty.text.toString().toInt())) {
-            viewModel.addNewGrocery(
-                (when (type) {
-                    "Raw" -> 1
-                    "Clean" -> 2
-                    "Water" -> 3
-                    "Snack" -> 4
-                    "Fruit or Veggies" -> 5
-                    else -> 6
-                }),
-                inputGrocery.text.toString(),
-                inputQty.text.toString().toInt()
-            )
+                inputQty.text.toString())
+        ) {
+            name = inputGrocery.text.toString()
+            qty = inputQty.text.toString().toInt()
         }
+
+        // if not, use default input
+        else {
+            if (inputGrocery.text.toString().isBlank() && inputQty.text.toString().isNotBlank()) {
+                name = type
+                qty = inputQty.text.toString().toInt()
+            } else if (inputGrocery.text.toString().isNotBlank() && inputQty.text.toString().isBlank()) {
+                name = inputGrocery.text.toString()
+                qty = 1
+            } else {
+                name = type
+                qty = 1
+            }
+        }
+
+        // call DAO to insert grocery
+        viewModel.addNewGrocery(
+            (when (type) {
+                "Raw" -> 1
+                "Clean" -> 2
+                "Water" -> 3
+                "Snack" -> 4
+                "Fruit or Veggies" -> 5
+                else -> 6
+            }),
+            name,
+            qty
+        )
 
         val action = GroceryAddFragmentDirections.actionGroceryAddFragmentToGroceryList()
         this.findNavController().navigate(action)
