@@ -19,8 +19,8 @@ interface GroceryDao {
     fun getType(): Flow<List<Int>>
 
     @Query("UPDATE grocery SET stats = :stats WHERE id = :id")
-    fun updateItemStats(id: Int, stats: Boolean)
+    suspend fun updateItemStats(id: Int, stats: Boolean)
 
     @Query("DELETE FROM grocery")
-    fun deleteAllGroceries()
+    suspend fun deleteAllGroceries()
 }
