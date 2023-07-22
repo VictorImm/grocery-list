@@ -45,10 +45,10 @@ class GroceryViewModel(private val groceryDao: GroceryDao): ViewModel() {
     }
 
     // Check if input is valid
-    fun isEntryValid(type: Int, name: String, qty: Int): Boolean {
+    fun isEntryValid(type: Int, name: String, qty: String): Boolean {
         if (type.toString().isBlank() ||
             name.isBlank() ||
-            qty.toString().isBlank()) {
+            qty.isBlank()) {
             return false
         }
         return true

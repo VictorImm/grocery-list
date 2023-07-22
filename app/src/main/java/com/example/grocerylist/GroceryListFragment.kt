@@ -14,7 +14,6 @@ import com.example.grocerylist.dataViewModel.GroceryViewModel
 import com.example.grocerylist.dataViewModel.GroceryViewModelFactory
 import com.example.grocerylist.databinding.FragmentGroceryListBinding
 
-//TODO: Change action bar title
 class GroceryListFragment : Fragment() {
 
     // binding
@@ -59,8 +58,9 @@ class GroceryListFragment : Fragment() {
 
     private fun showRecyclerList(items: List<Int>) {
         rvItems.layoutManager = LinearLayoutManager(this.context)
-        // show recycle view from selected month
-        val itemAdapter = TypeAdapter(items, viewModel)
+
+        // show recycle view from list of type
+        val itemAdapter = TypeAdapter(items, viewModel, 1)
         rvItems.adapter = itemAdapter
     }
 
