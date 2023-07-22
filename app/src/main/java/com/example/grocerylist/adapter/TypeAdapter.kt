@@ -1,5 +1,6 @@
 package com.example.grocerylist.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,9 @@ import java.lang.ref.Cleaner
 
 class TypeAdapter(
     private val listType: List<Int>,
-    private val groceryViewModel: GroceryViewModel
+    private val groceryViewModel: GroceryViewModel,
+    private val activity: Int
 ): RecyclerView.Adapter<TypeAdapter.ListViewHolder>() {
-    private val groceryAdaptersList: MutableList<GroceryAdapter> = mutableListOf()
 
     class ListViewHolder(typeView: View): RecyclerView.ViewHolder(typeView) {
         val tvTypeImage: ImageView = itemView.findViewById(R.id.type_image)
@@ -46,23 +47,63 @@ class TypeAdapter(
         val item = listType[position]
 
         // binding rv to other rv
-        // Initialising groceryAdapter
-        val groceryAdapter = GroceryAdapter(
-            when (item) {
-                1 -> groceryViewModel.nBoughtRaw
-                2 -> groceryViewModel.nBoughtClean
-                3 -> groceryViewModel.nBoughtWater
-                4 -> groceryViewModel.nBoughtSnack
-                5 -> groceryViewModel.nBoughtFruit
-                else -> groceryViewModel.nBoughtOther
-            }
-        )
+        when (activity) {
+            1 -> {
+                val groceryAdaptersList: MutableList<GroceryAdapter> = mutableListOf()
 
-        // Save groceryAdapter same as position
-        if (groceryAdaptersList.size <= position) {
-            groceryAdaptersList.add(groceryAdapter)
-        } else {
-            groceryAdaptersList[position] = groceryAdapter
+                // Initialising groceryAdapter
+                val groceryAdapter = GroceryAdapter(
+                    when (item) {
+                        1 -> groceryViewModel.nBoughtRaw
+                        2 -> groceryViewModel.nBoughtClean
+                        3 -> groceryViewModel.nBoughtWater
+                        4 -> groceryViewModel.nBoughtSnack
+                        5 -> groceryViewModel.nBoughtFruit
+                        else -> groceryViewModel.nBoughtOther
+                    },
+                    groceryViewModel
+                )
+
+                // Save groceryAdapter same as position
+                if (groceryAdaptersList.size <= position) {
+                    groceryAdaptersList.add(groceryAdapter)
+                } else {
+                    groceryAdaptersList[position] = groceryAdapter
+                }
+
+                holder.rvGroceryList.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = groceryAdapter
+                }
+            }
+            else -> {
+                val cartAdaptersList: MutableList<CartAdapter> = mutableListOf()
+
+                // Initialising cartAdapter
+                val cartAdapter = CartAdapter(
+                    when (item) {
+                        1 -> groceryViewModel.boughtRaw
+                        2 -> groceryViewModel.boughtClean
+                        3 -> groceryViewModel.boughtWater
+                        4 -> groceryViewModel.boughtSnack
+                        5 -> groceryViewModel.boughtFruit
+                        else -> groceryViewModel.boughtOther
+                    },
+                    groceryViewModel
+                )
+
+                // Save groceryAdapter same as position
+                if (cartAdaptersList.size <= position) {
+                    cartAdaptersList.add(cartAdapter)
+                } else {
+                    cartAdaptersList[position] = cartAdapter
+                }
+
+                holder.rvGroceryList.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = cartAdapter
+                }
+            }
         }
 
         holder.tvTypeImage.setImageResource(
@@ -84,10 +125,6 @@ class TypeAdapter(
                 5 -> "Fruit/Veggie"
                 else -> "Other"
             }
-        holder.rvGroceryList.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = groceryAdapter
-        }
     }
 
     override fun getItemCount(): Int = listType.size
