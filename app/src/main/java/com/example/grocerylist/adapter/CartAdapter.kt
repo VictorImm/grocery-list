@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grocerylist.R
@@ -19,6 +21,7 @@ class CartAdapter(
     class ListViewHolder(cartView: View): RecyclerView.ViewHolder(cartView) {
         val groName: TextView = itemView.findViewById(R.id.text_item)
         val groQty: TextView = itemView.findViewById(R.id.text_qty)
+        val groDelete : ImageButton = itemView.findViewById(R.id.btn_delete)
     }
 
     override fun onCreateViewHolder(
@@ -37,10 +40,13 @@ class CartAdapter(
 
     override fun onBindViewHolder(holder: CartAdapter.ListViewHolder, position: Int) {
         val item = listGrocery.value?.get(position)
-
+//        holder.groDelete.visibility = View.VISIBLE
         if (item != null) {
             holder.groName.text = item.groName
             holder.groQty.text = item.groQty.toString()
+            holder.groDelete.setOnClickListener {
+                groceryViewModel.updateItem(item.id, true)
+            }
         }
     }
 

@@ -25,8 +25,8 @@
             android:layout_marginStart="16dp"
             android:text="Item"
             android:textColor="?colorOnPrimary"
-            android:textStyle="bold"
             android:textSize="12sp"
+            android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
@@ -35,15 +35,28 @@
             android:id="@+id/text_qty"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:text="qty"
             android:textAlignment="textEnd"
+            android:textColor="?colorOnPrimary"
+            android:textStyle="bold"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@+id/btn_delete"
+            card_view:layout_constraintStart_toEndOf="@+id/text_item"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:foregroundGravity="center"
+            android:visibility="visible"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/text_item"
             card_view:layout_constraintTop_toTopOf="parent"
-            android:textColor="?colorOnPrimary"
-            android:textStyle="bold"/>
+            card_view:srcCompat="@drawable/ic_delete" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
