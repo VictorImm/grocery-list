@@ -7,18 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.grocerylist.dataViewModel.GroceryViewModel
 import com.example.grocerylist.dataViewModel.GroceryViewModelFactory
 import com.example.grocerylist.databinding.FragmentGroceryAddBinding
-import com.example.grocerylist.databinding.FragmentGroceryListBinding
 
 class GroceryAddFragment : Fragment() {
 
     companion object {
         const val TYPE = "type"
     }
+
     private lateinit var typeId: String
 
     // binding
@@ -63,48 +64,37 @@ class GroceryAddFragment : Fragment() {
     }
 
     private fun btnClicked(type: String) {
-        var name: String = ""
-        var qty: Int = 0
+        val name = inputGrocery.text.toString()
+        val qty = inputQty.text.toString()
 
         // check if entry is filled
-        if (viewModel.isEntryValid(
-                0,
-                inputGrocery.text.toString(),
-                inputQty.text.toString())
-        ) {
-            name = inputGrocery.text.toString()
-            qty = inputQty.text.toString().toInt()
-        }
-
-        // if not, use default input
-        else {
-            if (inputGrocery.text.toString().isBlank() && inputQty.text.toString().isNotBlank()) {
-                name = type
-                qty = inputQty.text.toString().toInt()
-            } else if (inputGrocery.text.toString().isNotBlank() && inputQty.text.toString().isBlank()) {
-                name = inputGrocery.text.toString()
-                qty = 1
+        if (qty.isNotEmpty() && viewModel.isQuantityNotZero(qty)) {
+            if (viewModel.isEntryValid(
+                    0,
+                    inputGrocery.text.toString(),
+                    inputQty.text.toString()
+                )
+            ) {
+                // call DAO to insert grocery
+                viewModel.addNewGrocery(
+                    (when (type) {
+                        "Raw" -> 1
+                        "Clean" -> 2
+                        "Water" -> 3
+                        "Snack" -> 4
+                        "Fruit or Veggies" -> 5
+                        else -> 6
+                    }),
+                    name,
+                    qty.toInt()
+                )
+                val action = GroceryAddFragmentDirections.actionGroceryAddFragmentToGroceryList()
+                this.findNavController().navigate(action)
             } else {
-                name = type
-                qty = 1
+                Toast.makeText(context, "Fill out the empty fields !", Toast.LENGTH_SHORT).show()
             }
+        } else {
+            Toast.makeText(context, "Quantity cannot be Zero or Null!", Toast.LENGTH_SHORT).show()
         }
-
-        // call DAO to insert grocery
-        viewModel.addNewGrocery(
-            (when (type) {
-                "Raw" -> 1
-                "Clean" -> 2
-                "Water" -> 3
-                "Snack" -> 4
-                "Fruit or Veggies" -> 5
-                else -> 6
-            }),
-            name,
-            qty
-        )
-
-        val action = GroceryAddFragmentDirections.actionGroceryAddFragmentToGroceryList()
-        this.findNavController().navigate(action)
     }
 }
