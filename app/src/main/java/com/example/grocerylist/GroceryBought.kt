@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grocerylist.adapter.TypeAdapter
 import com.example.grocerylist.dataViewModel.GroceryViewModel
 import com.example.grocerylist.dataViewModel.GroceryViewModelFactory
+import com.example.grocerylist.dataViewModel.SavedItemViewModel
+import com.example.grocerylist.dataViewModel.SavedItemViewModelFactory
 import com.example.grocerylist.databinding.ActivityGroceryBoughtBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -23,9 +24,15 @@ class GroceryBought : AppCompatActivity() {
     private lateinit var btnFinish: Button
 
     // viewModel initialization
-    private val viewModel: GroceryViewModel by viewModels {
+    private val groceryItemViewModel: GroceryViewModel by viewModels {
         GroceryViewModelFactory(
             (application as GroceryApplication).database.groceryDao()
+        )
+    }
+
+    private val savedItemViewModel: SavedItemViewModel by viewModels {
+        SavedItemViewModelFactory(
+            (application as GroceryApplication).database.itemDao()
         )
     }
 
@@ -41,7 +48,7 @@ class GroceryBought : AppCompatActivity() {
         rvCart = binding.rvCart
         rvCart.setHasFixedSize(true)
 
-        viewModel.retrieveType().observe(this) {
+        groceryItemViewModel.retrieveType().observe(this) {
             showRecyclerList(it)
         }
 
@@ -54,7 +61,7 @@ class GroceryBought : AppCompatActivity() {
         rvCart.layoutManager = LinearLayoutManager(this)
 
         // show recycle view from list of type
-        val itemAdapter = TypeAdapter(items, viewModel, 2)
+        val itemAdapter = TypeAdapter(items, groceryItemViewModel, savedItemViewModel, 2)
         rvCart.adapter = itemAdapter
     }
 
@@ -65,7 +72,7 @@ class GroceryBought : AppCompatActivity() {
             .setCancelable(false)
             .setNegativeButton("No") { _, _ -> }
             .setPositiveButton("Yes") { _, _ ->
-                viewModel.truncateGrocery()
+                groceryItemViewModel.truncateGrocery()
                 finish()
             }
             .show()

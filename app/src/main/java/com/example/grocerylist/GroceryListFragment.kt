@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.grocerylist.adapter.TypeAdapter
 import com.example.grocerylist.dataViewModel.GroceryViewModel
 import com.example.grocerylist.dataViewModel.GroceryViewModelFactory
+import com.example.grocerylist.dataViewModel.SavedItemViewModel
+import com.example.grocerylist.dataViewModel.SavedItemViewModelFactory
 import com.example.grocerylist.databinding.FragmentGroceryListBinding
 
 class GroceryListFragment : Fragment() {
@@ -27,6 +29,12 @@ class GroceryListFragment : Fragment() {
     private val viewModel: GroceryViewModel by viewModels {
         GroceryViewModelFactory(
             (activity?.application as GroceryApplication).database.groceryDao()
+        )
+    }
+
+    private val savedItemViewModel : SavedItemViewModel by viewModels {
+        SavedItemViewModelFactory(
+            (activity?.application as GroceryApplication).database.itemDao()
         )
     }
 
@@ -60,7 +68,7 @@ class GroceryListFragment : Fragment() {
         rvItems.layoutManager = LinearLayoutManager(this.context)
 
         // show recycle view from list of type
-        val itemAdapter = TypeAdapter(items, viewModel, 1)
+        val itemAdapter = TypeAdapter(items, viewModel, savedItemViewModel, 1)
         rvItems.adapter = itemAdapter
     }
 

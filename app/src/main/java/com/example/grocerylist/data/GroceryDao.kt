@@ -1,6 +1,5 @@
 package com.example.grocerylist.data
 
-import androidx.core.view.WindowInsetsCompat.Type.InsetsType
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
@@ -20,6 +19,9 @@ interface GroceryDao {
 
     @Query("UPDATE grocery SET stats = :stats WHERE id = :id")
     suspend fun updateItemStats(id: Int, stats: Boolean)
+
+    @Query("DELETE FROM grocery WHERE id = :id")
+    suspend fun deleteItem(id: Int)
 
     @Query("DELETE FROM grocery")
     suspend fun deleteAllGroceries()

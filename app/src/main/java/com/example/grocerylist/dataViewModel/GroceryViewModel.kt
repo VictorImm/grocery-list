@@ -71,6 +71,13 @@ class GroceryViewModel(private val groceryDao: GroceryDao): ViewModel() {
         }
     }
 
+    // Delete item
+    fun deleteItem(id:Int) {
+        viewModelScope.launch {
+            groceryDao.deleteItem(id)
+        }
+    }
+
     // Truncate database
     fun truncateGrocery() {
         viewModelScope.launch {

@@ -6,12 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Grocery::class],
-    version = 1,
+    entities = [Grocery::class, Item::class],
+    version = 2,
     exportSchema = false
 )
 abstract class GroceryRoomDatabase: RoomDatabase() {
     abstract fun groceryDao(): GroceryDao
+
+    abstract fun itemDao() : ItemDao
 
     companion object {
         @Volatile

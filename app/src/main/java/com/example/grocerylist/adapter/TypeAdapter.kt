@@ -1,29 +1,24 @@
 package com.example.grocerylist.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.grocerylist.GroceryApplication
 import com.example.grocerylist.R
-import com.example.grocerylist.data.Grocery
 import com.example.grocerylist.dataViewModel.GroceryViewModel
-import com.example.grocerylist.dataViewModel.GroceryViewModelFactory
-import java.lang.ref.Cleaner
+import com.example.grocerylist.dataViewModel.SavedItemViewModel
 
 class TypeAdapter(
     private val listType: List<Int>,
     private val groceryViewModel: GroceryViewModel,
+    private val savedItemViewModel: SavedItemViewModel,
     private val activity: Int
-): RecyclerView.Adapter<TypeAdapter.ListViewHolder>() {
+) : RecyclerView.Adapter<TypeAdapter.ListViewHolder>() {
 
-    class ListViewHolder(typeView: View): RecyclerView.ViewHolder(typeView) {
+    class ListViewHolder(typeView: View) : RecyclerView.ViewHolder(typeView) {
         val tvTypeImage: ImageView = itemView.findViewById(R.id.type_image)
         val tvTypeText: TextView = itemView.findViewById(R.id.type_name)
         val rvGroceryList: RecyclerView = itemView.findViewById<RecyclerView?>(R.id.type_rv)
@@ -61,7 +56,8 @@ class TypeAdapter(
                         5 -> groceryViewModel.nBoughtFruit
                         else -> groceryViewModel.nBoughtOther
                     },
-                    groceryViewModel
+                    groceryViewModel,
+                    savedItemViewModel
                 )
 
                 // Save groceryAdapter same as position
@@ -76,7 +72,8 @@ class TypeAdapter(
                     adapter = groceryAdapter
                 }
             }
-            else -> {
+
+            2 -> {
                 val cartAdaptersList: MutableList<CartAdapter> = mutableListOf()
 
                 // Initialising cartAdapter
@@ -102,6 +99,28 @@ class TypeAdapter(
                 holder.rvGroceryList.apply {
                     layoutManager = LinearLayoutManager(context)
                     adapter = cartAdapter
+                }
+            }
+
+            else -> {
+                var savedItemAdapterList: MutableList<SavedItemAdapter> = mutableListOf()
+
+                // Initialising savedItemAdapter
+                val savedItemAdapter: SavedItemAdapter = SavedItemAdapter(
+                    when (item) {
+                        1 -> savedItemViewModel.nRaw
+                        2 -> savedItemViewModel.nClean
+                        3 -> savedItemViewModel.nWater
+                        4 -> savedItemViewModel.nSnack
+                        5 -> savedItemViewModel.nFruit
+                        else -> savedItemViewModel.nOther
+                    },
+                    savedItemViewModel
+                )
+
+                holder.rvGroceryList.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = savedItemAdapter
                 }
             }
         }

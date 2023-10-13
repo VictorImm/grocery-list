@@ -45,7 +45,13 @@ class MainActivity : AppCompatActivity() {
                 // go to finish activity
                 val intent = Intent(this, GroceryBought::class.java)
                 startActivity(intent)
+                return true
+            }
 
+            R.id.action_saved -> {
+                // go to saved list activity
+                val intent = Intent(this, GrocerySaved::class.java)
+                startActivity(intent)
                 return true
             }
 
