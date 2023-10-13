@@ -48,10 +48,14 @@ class GroceryViewModel(private val groceryDao: GroceryDao): ViewModel() {
     fun isEntryValid(type: Int, name: String, qty: String): Boolean {
         if (type.toString().isBlank() ||
             name.isBlank() ||
-            qty.isBlank()) {
+            qty.isBlank()
+        ) {
             return false
         }
         return true
+    }
+    fun isQuantityNotZero(qty: String) : Boolean{
+        return qty.toInt() > 0
     }
 
     // Retrieve item
