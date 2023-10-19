@@ -1,7 +1,7 @@
 # Grocery List Android Application
 Grocery List App that uses Kotlin-XML, open to #hacktoberfest
 
-![Grocery List App Logo](app_logo.png)
+![Grocery List App Logo]()
 
 ## Overview
 
@@ -26,8 +26,12 @@ The Grocery List Android Application is a simple and intuitive mobile app design
 - **Offline Access**: Use the app without an internet connection; your data will sync when you're back online.
 
 ## Screenshots
-
-![Screenshot 1](Screenshot_20231020_034702.png) ![Screenshot 2](screenshots/screenshot2.png) ![Screenshot 3](screenshots/screenshot3.png)
+<div align="center">
+<img src="screenshots/Screenshot_20231020_034702.png" width="200" height="400" alt="Grocery List App Logo">
+<img src="screenshots/Screenshot_20231020_034756.png" width="200" height="400" alt="Grocery List App Logo">
+<img src="screenshots/Screenshot_20231020_034816.png" width="200" height="400" alt="Grocery List App Logo">
+<img src="screenshots/Screenshot_20231020_034832.png" width="200" height="400" alt="Grocery List App Logo">
+</div>
 
 ## Installation and Adding your first PR:
 
