@@ -1,7 +1,7 @@
 # Grocery List Android Application
 Grocery List App that uses Kotlin-XML, open to #hacktoberfest
 
-![Grocery List App Logo]()
+![Grocery List App Logo](screenshots/ic_launcher_foreground.png)
 
 ## Overview
 
