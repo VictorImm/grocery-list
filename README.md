@@ -39,7 +39,7 @@ The Grocery List Android Application is a simple and intuitive mobile app design
 - Clone on your local machine
 
 ```terminal
-git clone https://github.com/jayneeel/Hacktober-TicTacToe.git
+git clone https://github.com/VictorImm/grocery-list
 ```
 - Navigate to project directory.
 ```terminal
