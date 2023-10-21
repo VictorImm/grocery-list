@@ -73,4 +73,7 @@ dependencies {
     // Navigation libraries
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //gif libraries for splash screen
+    implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.28"
 }
